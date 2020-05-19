@@ -711,7 +711,7 @@ def decrypt_files_in_root(decrypt_info, path_in, path_out):
 
 def decrypt_files_in_folder(decrypt_info, folder, path_out):
 
-    folder_to_media_type = {'movies': 'video', 'pictures': 'photo'}
+    folder_to_media_type = {'movies': 'video', 'pictures': 'photo', 'audios': 'audio', }
 
     media_out_dir = path_out.absolute().joinpath('storage')
     media_unk_dir = path_out.absolute().joinpath('unknown')
