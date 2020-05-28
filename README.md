@@ -1,6 +1,3 @@
-# disclaimer
-this is just an updated version of the original script, all credits to the original author
-
 # kobackupdec
 Huawei backup decryptor
 
