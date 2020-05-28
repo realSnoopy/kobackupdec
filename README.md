@@ -1,3 +1,10 @@
+# disclaimer
+this is just an updated version of the original script, all credits to the original author
+
+## updates
++ 'audios': 'audio' in `decrypt_files_in_folder()` for decrypting audio files
++ fast workaround for new style backup without `checkMSG` in `info.xml`
+
 # kobackupdec
 Huawei backup decryptor
 
