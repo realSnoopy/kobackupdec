@@ -266,21 +266,32 @@ class Decryptor:
         logging.debug('SHA256(BKEY)[%s] = %s', len(self._bkey_sha256),
                       binascii.hexlify(self._bkey_sha256))
 
-        salt = self._checkMsg[32:]
-        logging.debug('SALT[%s] = %s', len(salt), binascii.hexlify(salt))
+        try:
+            salt = self._checkMsg[32:]
+            logging.debug('SALT[%s] = %s', len(salt), binascii.hexlify(salt))
 
-        res = PBKDF2(self._bkey, salt, Decryptor.dklen, Decryptor.count,
-                     Decryptor.prf, hmac_hash_module=None)
-        logging.debug('KEY check expected = %s',
-                      binascii.hexlify(self._checkMsg[:32]))
-        logging.debug('RESULT = %s', binascii.hexlify(res))
+            res = PBKDF2(self._bkey, salt, Decryptor.dklen, Decryptor.count,
+                         Decryptor.prf, hmac_hash_module=None)
+            logging.debug('KEY check expected = %s',
+                          binascii.hexlify(self._checkMsg[:32]))
+            logging.debug('RESULT = %s', binascii.hexlify(res))
 
-        if res == self._checkMsg[:32]:
-            logging.info('OK, backup key is correct!')
+            if res == self._checkMsg[:32]:
+                logging.info('OK, backup key is correct!')
+                self._good = True
+            else:
+                logging.error('KO, backup key is wrong!')
+                self._good = False
+
+        except:
+            print()
+            logging.error('NEW TYPE of backup found!')
+            logging.error('no check for correct key! will try to decrypt anyway...')
+            logging.error('be SURE that pass is correct!')
+            print()
+            input('press ENTER to continue...or cancel script with CTRL + C')
             self._good = True
-        else:
-            logging.error('KO, backup key is wrong!')
-            self._good = False
+            pass
 
     def decrypt_package(self, dec_material, data):
         if not self._good:

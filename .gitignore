@@ -1,0 +1,12 @@
+#ignore all
+*
+#track dirs
+!*/
+#track #-DLH-# dir
+!/#-DLH-#/
+#track python files
+!*.py
+#track readme
+!readme.md
+#track .gitignore
+!.gitignore
