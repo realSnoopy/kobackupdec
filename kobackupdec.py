@@ -266,8 +266,11 @@ class Decryptor:
         self._bkey_sha256 = SHA256.new(self._bkey).digest()[:16]
         logging.debug('SHA256(BKEY)[%s] = %s', len(self._bkey_sha256),
                       binascii.hexlify(self._bkey_sha256))
+        try:
+            salt = self._checkMsg[32:]
+        except:
+            salt = None # or False whatever you want
 
-        salt = self._checkMsg[32:]
         if salt:
             logging.debug('SALT[%s] = %s', len(salt), binascii.hexlify(salt))
 
