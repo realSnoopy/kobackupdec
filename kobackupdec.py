@@ -277,14 +277,10 @@ class Decryptor:
         except:
             salt = None # or False whatever you want
 
-<<<<<<< HEAD
-        if salt:
-=======
         # [TBR][TODO] This check should be refactored.
         if self._checkMsg:
             salt = self._checkMsg[32:]
 
->>>>>>> 5c916ea2dd308d65af1c14404588193a0ae5e253
             logging.debug('SALT[%s] = %s', len(salt), binascii.hexlify(salt))
 
             res = PBKDF2(self._bkey, salt, Decryptor.dklen, Decryptor.count,
